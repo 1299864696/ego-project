@@ -1,0 +1,5 @@
+127.0.0.1 - - [04/May/2019:16:52:18 +0800] "GET /rest/item/all HTTP/1.1" 200 45996 http-bio-8081-exec-1 6254
+127.0.0.1 - - [04/May/2019:16:52:27 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8081-exec-4 13
+127.0.0.1 - - [04/May/2019:16:52:51 +0800] "GET /rest/item/all?callback=haha HTTP/1.1" 200 45949 http-bio-8081-exec-6 1740
+0:0:0:0:0:0:0:1 - - [04/May/2019:17:03:17 +0800] "GET /rest/item/all?callback=category.getDataService HTTP/1.1" 200 45968 http-bio-8081-exec-10 1871
+0:0:0:0:0:0:0:1 - - [04/May/2019:17:04:04 +0800] "GET /rest/item/all?callback=category.getDataService HTTP/1.1" 200 45968 http-bio-8081-exec-1 1158

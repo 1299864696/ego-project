@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.3.xsd">
+
+	<!-- 1、创建真实的工厂 -->
+	<bean name="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${MQ_ADDRESS}"></property>
+		<property name="userName" value="${MQ_USER}"></property>
+		<property name="password" value="${MQ_PASSWD}"></property>
+	</bean>
+	
+
+	<!-- 2、创建ActiveMQ连接池,使用连接池好处：链接只需要初始化一次，每次要使用的时候，直接从连接池获取，用完之后还给连接池。省去了每次创建、销毁连接的时间
+		相当于连接mysql时候的数据源
+	 -->
+	<bean name="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<!-- 真实的链接工厂 -->
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<property name="maxConnections" value="20"></property>
+	</bean>
+	
+	<!-- 3、spring整合ActiveMQ，基于jms规范 -->
+	<!-- 可以缓存session会话 -->
+	<bean name="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="pooledConnectionFactory"/>
+		<property name="sessionCacheSize" value="5"/>
+	</bean>
+	
+	<!-- 4、创建JmsTemplate对象，简化消息服务的操作代码 -->
+	<bean name="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cachingConnectionFactory"></property>
+	</bean>
+	
+</beans>

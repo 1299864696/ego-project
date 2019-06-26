@@ -1,0 +1,6 @@
+127.0.0.1 - - [16/May/2019:11:28:04 +0800] "GET /search/doSearch?page=1&keyword=%E6%89%8B%E6%9C%BA HTTP/1.1" 200 8754 http-bio-8083-exec-1 30679
+127.0.0.1 - - [16/May/2019:11:28:35 +0800] "GET /search/doSearch?page=1&keyword=%E5%9B%BE%E4%B9%A6 HTTP/1.1" 200 69 http-bio-8083-exec-3 306
+127.0.0.1 - - [16/May/2019:11:28:44 +0800] "GET /search/doSearch?page=1&keyword=%E6%AF%8D%E4%BA%B2%E8%8A%82 HTTP/1.1" 200 69 http-bio-8083-exec-5 600
+127.0.0.1 - - [16/May/2019:11:28:53 +0800] "GET /search/doSearch?page=1&keyword=%E6%B5%8B%E8%AF%95 HTTP/1.1" 200 367 http-bio-8083-exec-7 3420
+127.0.0.1 - - [16/May/2019:21:37:00 +0800] "GET /search/doSearch?page=1&keyword=%E5%B0%8F%E7%B1%B39 HTTP/1.1" 200 8080 http-bio-8083-exec-1 10729
+127.0.0.1 - - [16/May/2019:21:48:08 +0800] "GET /search/doSearch?page=1&keyword=%E5%B0%8F%E7%B1%B36 HTTP/1.1" 200 8266 http-bio-8083-exec-3 9908

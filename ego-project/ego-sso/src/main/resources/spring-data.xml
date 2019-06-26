@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- 1、创建数据源 
+		任何的持久层框架，和spring的整合，第一步都是通过Spring创建数据源。
+		
+		原因：持久层框架和Spring的整合，是为了使用Spring的事物代理，而事物代理离不开数据源。
+	-->
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="${db.driver}"></property>
+		<property name="url" value="${db.url}"></property>
+		<property name="username" value="${db.username}"></property>
+		<property name="password" value="${db.password}"></property>
+	</bean>
+	
+	<!-- 2、创建sessionFactory工厂 -->
+	<bean name="sqlSessionFactoryBean" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+		<!-- 加载数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+		
+		<!-- 指定映射类pojo所在包 -->
+		<property name="typeAliasesPackage" value="com.xkt.base.pojo"></property>
+		
+		<!-- 配置MP相关插件 -->
+		<property name="plugins">
+			<list>
+				<!-- 分页插件 -->
+				<bean class="com.baomidou.mybatisplus.plugins.PaginationInterceptor"></bean>
+				
+				<!-- 配置拦截器属性 -->
+				<bean class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
+					
+					<!-- 配置SQL响应时间，开发阶段方便做调优 -->
+					<property name="maxTime" value="1000"></property>
+					<!-- 输出SQL语句 -->
+					<property name="format" value="true"></property>
+					
+				</bean>
+			</list>
+		</property>
+		
+		<!-- MP全局配置 -->
+		<property name="globalConfig" ref="globalConfiguration"></property>
+	</bean>
+	
+	<!-- 3、配置Mybatis动态代理 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 加载session工厂 -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"></property>
+		
+		<!-- 指定Mapper接口 -->
+		<property name="basePackage" value="com.xkt.base.mapper"></property>
+	</bean>
+	
+	<!-- 4、配置事务代理 -->
+	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 5、开启注解式事务代理 -->
+	<tx:annotation-driven/>
+	
+	<!-- MP全局配置 -->
+	<bean name="globalConfiguration" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+		<!-- 配置表的前缀 -->
+		<property name="tablePrefix" value="tb_"></property>
+		<!-- 驼峰标识，3.0版本后，默认为true -->
+		<property name="dbColumnUnderline" value="true"></property>
+		
+		<!-- 
+		主键策略
+		AUTO->"0"(数据库ID自增)
+		INPUT->"1"(用户输入ID) -->
+		<property name="idType" value="0"></property>
+	</bean>
+
+</beans>

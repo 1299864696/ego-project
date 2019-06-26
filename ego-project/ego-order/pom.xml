@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.xkt.ego</groupId>
+    <artifactId>ego-project</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>ego-order</artifactId>
+  <packaging>war</packaging>
+  
+  <dependencies>
+  
+	  <!-- ego-base -->
+	  <dependency>
+	  	<groupId>com.xkt.ego</groupId>
+	  	<artifactId>ego-base</artifactId>
+	  	<version>1.0</version>
+	  </dependency>
+	  
+	  <!-- Jackson Json处理工具包 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		
+		<!-- Mybatis -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+	        <artifactId>mybatis-plus</artifactId>
+		</dependency>
+		<!-- MySql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- 连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+		</dependency>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+  	<plugins>
+		<!-- 配置Tomcat插件 -->
+		<plugin>
+			<groupId>org.apache.tomcat.maven</groupId>
+			<artifactId>tomcat7-maven-plugin</artifactId>
+			<configuration>
+				<path>/</path>
+				<port>8085</port>
+				<uriEncoding>utf-8</uriEncoding>
+			</configuration>
+		</plugin>
+	</plugins>
+  </build>
+</project>

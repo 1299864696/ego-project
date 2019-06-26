@@ -1,0 +1,4 @@
+com\xkt\test\HttpClientPost.class
+com\xkt\test\HttpClientPostWithParam.class
+com\xkt\test\HttpClientGet.class
+com\xkt\test\HttpClientGetWithParam.class
